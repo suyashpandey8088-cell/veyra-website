@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Veyra — discover and book unforgettable weekend experiences near Pune." />
+  <title>Veyra — Your next story starts here.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav-wrap">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Veyra home">
+        <svg class="logo-mark" viewBox="0 0 42 42" aria-hidden="true"><path d="M6 7l15 27L36 7l-15 9L6 7z"/><path class="spark" d="M21 2l2.2 5.8L29 10l-5.8 2.2L21 18l-2.2-5.8L13 10l5.8-2.2L21 2z"/></svg>
+        <span>VEYRA</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#experiences">Experiences</a><a href="#how">How it works</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn theme-toggle" aria-label="Toggle color theme"><span class="theme-icon">☀</span></button>
+        <button class="login-btn" data-open-auth>Log in</button>
+        <button class="btn btn-small" data-open-auth>Join Veyra</button>
+        <button class="menu-btn" aria-label="Toggle menu">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-bg" aria-hidden="true"></div><div class="hero-glow"></div>
+      <div class="hero-content container">
+        <div class="eyebrow reveal">CURATED AROUND PUNE <span></span> EVERY WEEKEND</div>
+        <h1 class="reveal">Make Your Weekend<br><em>Unforgettable.</em></h1>
+        <p class="hero-copy reveal">Handpicked escapes, wild adventures, and creative experiences—made for stories you’ll tell long after Monday.</p>
+        <div class="hero-actions reveal">
+          <a href="#experiences" class="btn">Explore Experiences <span>↗</span></a>
+          <button class="btn btn-ghost" data-plan>Plan Your Weekend <span>→</span></button>
+        </div>
+        <div class="hero-proof reveal">
+          <div class="avatars"><span>A</span><span>K</span><span>R</span><span>M</span></div>
+          <div><strong>4.9 <span class="stars">★★★★★</span></strong><small>Loved by 12,000+ explorers</small></div>
+        </div>
+      </div>
+      <div class="scroll-note">SCROLL TO DISCOVER <span>↓</span></div>
+    </section>
+
+    <section class="search-strip">
+      <form class="search-box container" id="searchForm">
+        <label><small>WHAT</small><span class="search-control"><b>⌕</b><input id="searchInput" placeholder="Search experiences" /></span></label>
+        <label><small>WHEN</small><span class="search-control"><b>⌑</b><input id="dateInput" type="date" /></span></label>
+        <label><small>VIBE</small><span class="search-control"><b>◇</b><select id="vibeSelect"><option value="all">Any vibe</option><option>Adventure</option><option>Creative</option><option>Chill</option><option>Culture</option></select></span></label>
+        <button class="btn" type="submit">Find my weekend →</button>
+      </form>
+    </section>
+
+    <section class="section experiences" id="experiences">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">EXPLORE THE UNEXPECTED</div><h2>Your weekend,<br><em>your kind of wild.</em></h2></div><p>From sunrise summits to clay-stained hands—pick a feeling and go.</p></div>
+        <div class="filter-row reveal" role="group" aria-label="Experience filters">
+          <button class="chip active" data-filter="all">All experiences</button><button class="chip" data-filter="Adventure">Adventure</button><button class="chip" data-filter="Creative">Creative</button><button class="chip" data-filter="Chill">Chill & nature</button><button class="chip" data-filter="Culture">City & culture</button>
+        </div>
+        <div class="experience-grid" id="experienceGrid"></div>
+        <p class="empty-state" hidden>No experiences match your search. Try another vibe.</p>
+      </div>
+    </section>
+
+    <section class="section how" id="how">
+      <div class="container split">
+        <div class="sticky-copy reveal"><div class="eyebrow">EFFORTLESSLY EPIC</div><h2>From “maybe” to<br><em>booked in minutes.</em></h2><p>No endless group chats. No chaotic planning. Just a smoother way to make the weekend happen.</p><button class="text-link" data-plan>Plan my weekend <span>↗</span></button></div>
+        <div class="steps">
+          <article class="step reveal"><span>01</span><div class="step-icon">⌕</div><div><h3>Discover your vibe</h3><p>Search handpicked experiences by mood, distance, and budget.</p></div></article>
+          <article class="step reveal"><span>02</span><div class="step-icon">□</div><div><h3>Choose your date</h3><p>See real-time availability and lock in the perfect weekend.</p></div></article>
+          <article class="step reveal"><span>03</span><div class="step-icon">✦</div><div><h3>Show up & live it</h3><p>We handle the details. You bring your people and your energy.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-head center reveal"><div><div class="eyebrow">CAUGHT IN THE WILD</div><h2>Proof that weekends<br><em>are worth living.</em></h2></div></div>
+        <div class="gallery">
+          <button class="gallery-item tall reveal" data-img="assets/cinematic-western-ghats-trekking-young-p-2.jpg"><img src="assets/cinematic-western-ghats-trekking-young-p-2.jpg" alt="Explorer overlooking hills"/><span>Rajmachi · 06:12 AM</span></button>
+          <button class="gallery-item reveal" data-img="assets/pune-pottery-workshop-young-adults-moder-1.jpg"><img src="assets/pune-pottery-workshop-young-adults-moder-1.jpg" alt="Pottery workshop"/><span>Pune · 04:20 PM</span></button>
+          <div class="gallery-quote reveal"><b>“</b><p>The kind of day you wish had a replay button.</p><small>— RIYA, VEYRA EXPLORER</small></div>
+          <button class="gallery-item wide reveal" data-img="assets/night-cycling-city-young-people-india-ci-2.jpg"><img src="assets/night-cycling-city-young-people-india-ci-2.jpg" alt="Night cycling in the city"/><span>Pune · 11:42 PM</span></button>
+          <button class="gallery-item reveal" data-img="assets/cinematic-western-ghats-trekking-young-p-3.jpg"><img src="assets/cinematic-western-ghats-trekking-young-p-3.jpg" alt="Camping in the Western Ghats"/><span>Bhandardara · 07:58 PM</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials" id="testimonials">
+      <div class="container">
+        <div class="eyebrow center-text">REAL PEOPLE · REAL WEEKENDS</div>
+        <div class="testimonial-stage">
+          <button class="round-btn prev" aria-label="Previous testimonial">←</button>
+          <div id="testimonialContent"></div>
+          <button class="round-btn next" aria-label="Next testimonial">→</button>
+        </div><div class="dots" id="testimonialDots"></div>
+      </div>
+    </section>
+
+    <section class="section about" id="about"><div class="container about-card reveal"><div><div class="eyebrow">WHY VEYRA</div><h2>Less scrolling.<br><em>More stories.</em></h2></div><div><p>We started Veyra because the best memories rarely happen on a screen. Every experience is locally rooted, safety checked, and thoughtfully curated for people who want more from their time off.</p><div class="stats"><span><strong>150+</strong><small>curated experiences</small></span><span><strong>4.9/5</strong><small>average rating</small></span><span><strong>12k+</strong><small>happy explorers</small></span></div></div></div></section>
+
+    <section class="section faq" id="faq"><div class="container faq-layout"><div class="reveal"><div class="eyebrow">GOOD TO KNOW</div><h2>Questions,<br><em>answered.</em></h2><p>Still wondering? <a href="#contact">Talk to a real human →</a></p></div><div class="accordion reveal" id="accordion">
+      <details open><summary>What’s included in an experience?<span>+</span></summary><p>Every listing clearly shows what’s included—typically expert hosts, required gear, permits, and select meals. Transport inclusions vary by experience.</p></details>
+      <details><summary>Can I cancel or reschedule?<span>+</span></summary><p>Yes. Most experiences offer free rescheduling up to 72 hours before departure. Exact terms are visible before checkout.</p></details>
+      <details><summary>Are the experiences beginner-friendly?<span>+</span></summary><p>Many are! Each card displays a difficulty level, and hosts share everything you need to prepare.</p></details>
+      <details><summary>Can I book for a group?<span>+</span></summary><p>Absolutely. Group bookings are supported, and groups of 8 or more can request a custom private experience.</p></details>
+    </div></div></section>
+
+    <section class="section contact" id="contact"><div class="container contact-card reveal"><div><div class="eyebrow">YOUR NEXT STORY STARTS HERE</div><h2>Weekend plans?<br><em>Consider them sorted.</em></h2><p>Fresh experiences, secret spots, and first dibs—straight to your inbox.</p></div><form id="newsletterForm"><div class="input-line"><input type="email" placeholder="Your email address" required/><button class="btn" type="submit">Count me in →</button></div><label class="consent"><input type="checkbox" required/> I’m okay with occasional adventures in my inbox.</label><p class="form-message"></p></form></div></section>
+  </main>
+
+  <footer><div class="container footer-top"><a class="brand" href="#home"><svg class="logo-mark" viewBox="0 0 42 42"><path d="M6 7l15 27L36 7l-15 9L6 7z"/><path class="spark" d="M21 2l2.2 5.8L29 10l-5.8 2.2L21 18l-2.2-5.8L13 10l5.8-2.2L21 2z"/></svg><span>VEYRA</span></a><p>Your next story starts here.</p><div class="socials"><a href="#">ig</a><a href="#">in</a><a href="#">yt</a></div></div><div class="container footer-bottom"><span>© 2026 Veyra Experiences</span><span>Pune, Maharashtra · +91 98765 43210 · hello@veyra.example</span><span><a href="#">Privacy</a> · <a href="#">Terms</a></span></div></footer>
+
+  <div class="modal" id="bookingModal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-panel booking-panel"><button class="modal-close" data-close>×</button><div class="booking-progress"><span class="active"></span><span></span><span></span><span></span></div><div id="bookingContent"></div></div></div>
+  <div class="modal" id="authModal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-panel auth-panel"><button class="modal-close" data-close>×</button><div class="auth-logo">✦</div><h2>Welcome to Veyra</h2><p>Sign in to save favourites and book faster.</p><div class="auth-tabs"><button class="active" data-auth="login">Log in</button><button data-auth="signup">Sign up</button></div><form id="authForm"><label>Email<input type="email" placeholder="you@example.com" required></label><label>Password<input type="password" minlength="6" placeholder="••••••••" required></label><button class="btn full" type="submit">Continue →</button><p class="form-message"></p></form></div></div>
+  <div class="lightbox" id="lightbox"><button data-lightbox-close>×</button><img alt="Expanded gallery view"/></div>
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
