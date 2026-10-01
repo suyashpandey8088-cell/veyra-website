@@ -156,6 +156,36 @@ Using Node.js:
 npx serve .
 ```
 
+## Configure Google Sign-In
+
+The Google button is OAuth-ready but requires your own Google Cloud credentials.
+
+1. Open the [Google Cloud Console](https://console.cloud.google.com/).
+2. Create or select a project.
+3. Configure the **OAuth consent screen** under Google Auth Platform.
+4. Create an **OAuth 2.0 Client ID** with application type **Web application**.
+5. Add the origins where the site will run under **Authorized JavaScript origins**. For this repository, add:
+
+```text
+http://localhost:4173
+https://suyashpandey8088-cell.github.io
+```
+
+6. Copy the generated Web Client ID.
+7. Open `config.js` and paste it into `googleClientId`:
+
+```javascript
+window.VEYRA_CONFIG = {
+  googleClientId: "YOUR_CLIENT_ID.apps.googleusercontent.com"
+};
+```
+
+8. Commit and deploy the updated configuration.
+
+The browser client ID is public by design. **Never add a Google client secret, private key, password, or backend credential to `config.js`.**
+
+The current static integration obtains an OAuth access token in memory, requests the signed-in user’s basic OpenID profile, and revokes the token on sign-out. For production authentication and durable user sessions, send the Google credential to a trusted backend, verify it server-side, and issue an application session using secure, HTTP-only cookies.
+
 ## Deploy to GitHub Pages
 
 1. Open the GitHub repository.

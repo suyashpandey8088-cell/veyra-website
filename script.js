@@ -38,6 +38,31 @@ $('#bookingContent').onclick=e=>{const sel=e.target.closest('[data-select-exp]')
 $$('[data-plan]').forEach(x=>x.onclick=()=>openBooking(1));$$('[data-open-auth]').forEach(x=>x.onclick=()=>openModal('#authModal'));
 $$('[data-auth]').forEach(b=>b.onclick=()=>{$$('[data-auth]').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#authForm .btn').textContent=b.dataset.auth==='login'?'Log in →':'Create account →'});
 $('#authForm').onsubmit=e=>{e.preventDefault();$('#authForm .form-message').textContent='Success! Welcome to Veyra.';setTimeout(()=>{closeModals();toast('You’re signed in ✦')},700)};
+
+// Google Identity Services (OAuth 2.0 token flow). The public Web Client ID lives in config.js.
+let googleTokenClient=null,googleAccessToken='';
+function loadGoogleIdentity(){return new Promise((resolve,reject)=>{if(window.google?.accounts?.oauth2)return resolve();const existing=$('script[data-google-identity]');if(existing){existing.addEventListener('load',resolve,{once:true});existing.addEventListener('error',reject,{once:true});return}const script=document.createElement('script');script.src='https://accounts.google.com/gsi/client';script.async=true;script.defer=true;script.dataset.googleIdentity='true';script.onload=resolve;script.onerror=reject;document.head.appendChild(script)})}
+async function startGoogleSignIn(){
+ const clientId=window.VEYRA_CONFIG?.googleClientId?.trim();
+ if(!clientId){toast('Add your Google Client ID in config.js first');return}
+ const button=$('#googleSignIn');button.disabled=true;button.querySelector('span').textContent='Connecting to Google…';
+ try{
+  await loadGoogleIdentity();
+  googleTokenClient=google.accounts.oauth2.initTokenClient({client_id:clientId,scope:'openid email profile',callback:async response=>{
+   if(response.error){button.disabled=false;button.querySelector('span').textContent='Continue with Google';toast('Google sign-in was not completed');return}
+   googleAccessToken=response.access_token;
+   try{const profileResponse=await fetch('https://www.googleapis.com/oauth2/v3/userinfo',{headers:{Authorization:`Bearer ${googleAccessToken}`}});if(!profileResponse.ok)throw new Error('Profile request failed');const profile=await profileResponse.json();setSignedInUser(profile);closeModals();toast(`Welcome, ${profile.given_name||profile.name||'explorer'} ✦`)}catch(error){toast('Signed in, but profile details could not be loaded')}finally{button.disabled=false;button.querySelector('span').textContent='Continue with Google'}
+  },error_callback:()=>{button.disabled=false;button.querySelector('span').textContent='Continue with Google';toast('The Google sign-in popup was closed')}});
+  googleTokenClient.requestAccessToken({prompt:'select_account'});
+ }catch(error){button.disabled=false;button.querySelector('span').textContent='Continue with Google';toast('Could not load Google Sign-In')}
+}
+function setSignedInUser(profile){
+ const login=$('#loginBtn'),join=$('#joinBtn');login.className='auth-user';login.removeAttribute('data-open-auth');login.textContent='';
+ if(profile.picture){const image=document.createElement('img');image.src=profile.picture;image.alt='';image.referrerPolicy='no-referrer';login.appendChild(image)}else{const initial=document.createElement('span');initial.className='user-initial';initial.textContent=(profile.name||'V')[0].toUpperCase();login.appendChild(initial)}
+ const name=document.createElement('span');name.textContent=profile.given_name||profile.name||'Account';login.appendChild(name);login.onclick=()=>toast(`Signed in as ${profile.email}`);
+ join.textContent='Sign out';join.onclick=()=>{if(googleAccessToken&&window.google?.accounts?.oauth2)google.accounts.oauth2.revoke(googleAccessToken,()=>{});googleAccessToken='';login.className='login-btn';login.textContent='Log in';login.onclick=()=>openModal('#authModal');join.textContent='Join Veyra';join.onclick=()=>openModal('#authModal');toast('Signed out')};
+}
+$('#googleSignIn').onclick=startGoogleSignIn;
 function renderTestimonial(){const t=testimonials[currentTestimonial];$('#testimonialContent').innerHTML=`<article class="testimonial"><q>“${t.q}”</q><div class="testimonial-person"><div class="avatar">${t.initial}</div><div><strong>${t.name}</strong><small>${t.role}</small></div></div></article>`;$('#testimonialDots').innerHTML=testimonials.map((_,i)=>`<button class="${i===currentTestimonial?'active':''}" data-dot="${i}" aria-label="View testimonial ${i+1}"></button>`).join('')}
 renderTestimonial();$('.testimonial-stage .next').onclick=()=>{currentTestimonial=(currentTestimonial+1)%testimonials.length;renderTestimonial()};$('.testimonial-stage .prev').onclick=()=>{currentTestimonial=(currentTestimonial-1+testimonials.length)%testimonials.length;renderTestimonial()};$('#testimonialDots').onclick=e=>{if(e.target.dataset.dot!==undefined){currentTestimonial=+e.target.dataset.dot;renderTestimonial()}};
 $$('.gallery-item').forEach(x=>x.onclick=()=>{$('#lightbox img').src=x.dataset.img;$('#lightbox').classList.add('open')});$('[data-lightbox-close]').onclick=()=>$('#lightbox').classList.remove('open');
