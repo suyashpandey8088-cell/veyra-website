@@ -2,5 +2,5 @@
 // Create a Google OAuth 2.0 Web Client ID in Google Cloud Console and paste it below.
 // This value is public by design; never put a Google client secret in this file.
 window.VEYRA_CONFIG = {
-  googleClientId: ""
+  googleClientId: "936775211553-q1j8t29p78f1966ej8iou23ikbh814hr.apps.googleusercontent.com"
 };
