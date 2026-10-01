@@ -169,6 +169,7 @@ The Google button is OAuth-ready but requires your own Google Cloud credentials.
 ```text
 http://localhost:4173
 https://suyashpandey8088-cell.github.io
+https://veyra-website12.vercel.app
 ```
 
 6. Copy the generated Web Client ID.
